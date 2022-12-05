@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="templates/AD.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="URL_salir">
+        <a class="dropdown-item" href="../index.xhtml">Salir</a>
+    </ui:define>
+
+    <ui:define name="URL_inicio">
+        <a class="navbar-brand ps-3" href="index.xhtml">Inicio</a>
+    </ui:define>
+
+    <ui:define name="lista_menu">
+        <a class="nav-link" href="clientes/clientes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Clientes
+        </a>
+        <a class="nav-link" href="planes/planes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Planes y servicios
+        </a>
+        <a class="nav-link" href="planes/planes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Entidades
+        </a>
+        <a class="nav-link" href="clientes/mensajes.xhtml"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Mensajes
+        </a>
+        <a class="nav-link" href="correos.xhtml"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            E-mails
+        </a>
+    </ui:define>
+
+    <ui:define name="URL_css">
+        <link href="../assents/css/styles.css" rel="stylesheet" type="text/css"/>
+    </ui:define>
+
+    <ui:define name="URL_js">
+        <script src="../assents/js/scripts.js" type="text/javascript"></script>
+    </ui:define>
+
+    <ui:define name="contenido">
+        <h1 class="mt-4">E-mails</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Envia un correo</li>
+        </ol>
+        
+        
+        <h:form>
+            <p:growl id="growl"  />
+            <div class="mb-3">
+                <h:outputLabel for="exampleFormControlInput1" class="form-label">Para:</h:outputLabel>
+                <h:inputText  value="#{adminCView.correo}" class="form-control" id="exampleFormControlInput1" h5:placeholder="name@example.com, name@example2.com, ..."></h:inputText>
+            </div>
+            <div class="mb-3">
+                <h:outputLabel for="exampleFormControlInput3" class="form-label">Asunto:</h:outputLabel>
+                <h:inputText value="#{adminCView.asunto}" class="form-control" id="exampleFormControlInput3" h5:placeholder="Asunto"></h:inputText>
+            </div>
+            
+            <div class="mb-3">
+                <h:outputLabel for="exampleFormControlInput1" class="form-label">Mensaje:</h:outputLabel>
+                <h:inputTextarea value="#{adminCView.mensaje}" class="form-control" id="exampleFormControlTextarea1" h5:placeholder="Mensaje" rows="3"></h:inputTextarea>
+            </div>
+            
+            <h:commandButton action="#{adminCView.enviarEmail()}" class="btn btn-primary" value="ENVIAR"/>
+        </h:form>
+        
+    </ui:define>
+
+
+</ui:composition>
+

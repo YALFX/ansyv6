@@ -1,0 +1,318 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="../templates/AD.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="URL_salir">
+        <a class="dropdown-item" href="../../index.xhtml">Salir</a>
+    </ui:define>
+
+    <ui:define name="URL_inicio">
+        <a class="navbar-brand ps-3" href="../index.xhtml">Inicio</a>
+    </ui:define>
+
+    <ui:define name="lista_menu">
+        <a class="nav-link" href="">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Clientes
+        </a>
+        <a class="nav-link" href="../planes/planes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Planes y servicios
+        </a>
+        <a class="nav-link" href="../entidades/entidades.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Entidades
+        </a>
+        <a class="nav-link" href="mensajes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Mensajes
+        </a>
+        <a class="nav-link" href="../correos.xhtml"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            E-mails
+        </a>
+    </ui:define>
+
+    <ui:define name="contenido">
+
+
+        <h1 class="mt-4">Clientes</h1>
+
+
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Administracion de clientes</li>
+        </ol>
+
+        <table id="example" class="display nowrap" >
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre y Apellido</th>
+                    <th>Documento</th>
+                    <th>Telefono</th>
+                    <th>Rol</th>
+                    <th>Opciones</th>
+                </tr>       
+            </thead>
+            <tbody>
+                <c:forEach items="#{adminCView.listarUsuarios()}" var="cd">
+                    <tr>
+
+                        <td>#{adminCView.count()}</td>
+                        <td>#{cd.IDCliente.cliNombre} #{cd.IDCliente.cliApellido}</td>
+                        <td>#{cd.IDCliente.cliTipoDocumento.docNombre} #{cd.IDCliente.cliNumeroDocumento}</td>                            
+                        <td>#{cd.IDCliente.cliTelefono}</td>                              
+                        <td>#{cd.rolTipo.nombre}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <h:form>
+                                    <h:commandButton action="#{cSession.cargarDatos(cd.idUsuario)}" image="../../assents/Img/icons/edit.svg" style="width: 25px"/>
+                                    <h:commandButton action="#{adminCView.eliminarU(cd.idUsuario)}" class="m-1" image="../../assents/Img/icons/trash.svg" style="width: 20px"/>
+                                </h:form>
+
+                            </div>
+                        </td> 
+
+                    </tr> 
+                </c:forEach>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre y Apellido</th>
+                    <th>Documento</th>
+                    <th>Telefono</th>
+                    <th>Rol</th>
+                    <th>Opciones</th>
+                </tr>
+            </tfoot>
+
+        </table>
+
+        <h:form>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                Nuevo usuario
+            </button>
+
+            <!-- Button trigger modal -->
+            <button value="Importar plantilla" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Importar plantilla
+            </button>
+
+
+            <h:commandButton action="#{cSession.dowDoc()}" image="../../assents/Img/icons/down-long-solid.svg" style="width: 40px" class="btn btn-primary m-1" value="descargar plantilla"></h:commandButton>
+        </h:form>
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Importar datos de clientes</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h:form enctype="multipart/form-data">
+                            <p:growl id="messages" showDetail="true"/>
+                            <p:fileUpload value="#{adminCView.file}" mode="simple" skinSimple="true" label="Cargar archivo" accept=".xlsx"/>
+                            <br/>
+                            <br/>
+                            <h:commandButton value="Subir" class="btn btn-primary" action="#{adminCView.cargarArchivo()}"></h:commandButton>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--Ingresar Clientes-->
+
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Registro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <h:form class="row g-2">
+
+                    <div class="col-md-12">
+                        <label for="roles" class="form-label">Rol</label>
+                        <h:selectOneMenu value="#{cSession.rol}" class="form-select"  >
+                            <f:selectItem itemLabel="Administrador" itemValue="1"></f:selectItem>
+                            <f:selectItem itemLabel="Cliente" itemValue="2"></f:selectItem>
+                        </h:selectOneMenu>
+                    </div>
+
+
+                    <div class="col-md-6">                                
+                        <h:inputText 
+                            id="Nombres-FR" 
+                            value="#{cSession.persona.cliNombre}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <label for="Nombres-FR" class="form-label">Nombres</label>
+                    </div>
+                    <div class="col-md-6">
+                        <h:inputText 
+                            id="Apellidos-FR" 
+                            value="#{cSession.persona.cliApellido}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <label for="Apellidos-FR">Apellidos</label>
+                    </div>
+                    <div class="col-md-3">
+                        <h:selectOneMenu value="#{cSession.tipoDocumento}" class="form-select"  >
+                            <f:selectItem itemLabel="T.I" itemValue="1"></f:selectItem>
+                            <f:selectItem itemLabel="C.C" itemValue="2"></f:selectItem>
+                        </h:selectOneMenu>
+
+                    </div>
+                    <div class="col-md-9">
+                        <h:inputText 
+                            id="Documento-FR" 
+                            value="#{cSession.persona.cliNumeroDocumento}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <label for="Documento-FR">Numero de documento</label>
+                    </div>
+
+                    <div class="col-md-3">
+                        <h:selectOneMenu value="#{cSession.genero}" class="form-select"  >
+                            <f:selectItem itemLabel="Selecione genero" itemValue="N" ></f:selectItem>
+                            <f:selectItem itemLabel="H" itemValue="H"></f:selectItem>
+                            <f:selectItem itemLabel="M" itemValue="M"></f:selectItem>
+                            <f:selectItem itemLabel="Otro" itemValue="O"></f:selectItem>
+                        </h:selectOneMenu>
+
+                    </div>
+                    <div class="col-md-9">
+                        <h:inputText 
+                            id="eps-fr" 
+                            value="#{cSession.persona.cliEPS}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <label for="eps-fr">EPS</label>
+                    </div>
+                    <div class="col-md-10">
+                        <h:inputText 
+                            id="FN-FR"
+                            required="true"
+                            value="#{cSession.fechaS}"
+                            h5:type="date"
+                            requiredMessage="Ingrese una fecha de nacimiento"
+                            class="form-control"/>
+                        <label for="FN-FR">Fecha de nacimiento(aaaa/mm/dd))</label>
+                    </div>
+                    <div class="col-md-2">
+                        <h:inputText 
+                            id="NH-FR" 
+                            value="#{cSession.persona.cliNumeroHijos}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <label for="NH-FR"># Hijos</label>
+                    </div>
+                    <div class="col-md-4">
+                        <h:selectOneMenu value="#{cSession.es}" class="form-select">
+                            <f:selectItem itemLabel="Selecione estado" itemValue="6"></f:selectItem>
+                            <f:selectItem itemLabel="Soltero" itemValue="1"></f:selectItem>
+                            <f:selectItem itemLabel="casado" itemValue="2"></f:selectItem>
+                            <f:selectItem itemLabel="Viudo" itemValue="3"></f:selectItem>
+                        </h:selectOneMenu>
+
+                    </div>
+                    <div class="col-md-8">
+                        <h:inputText 
+                            id="Pais-FR" 
+                            value="#{cSession.persona.cliPais}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <label for="Pais-FR">Pais</label>
+                    </div>
+                    <div class="col-md-6">
+                        <!--
+                        <h:inputText 
+                            id="Dep-FR" 
+                            value="#{cSession.persona.cliDepartamento}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        -->
+                        <label for="Dep-FR">Depatamento</label>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- 
+                        <h:inputText 
+                            id="Ciu-FR" 
+                            value="#{cSession.persona.cliCiudad}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        -->
+                        <label for="Ciu-FR">Ciudad</label>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <h:inputText 
+                            id="Correo-FR" 
+                            value="#{cSession.usuario.usCorreo}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <label for="Correo-FR">Correo</label>
+                    </div>
+
+                    <div class="col-md-7">
+                        <h:inputText 
+                            id="Telefono-FR" 
+                            value="#{cSession.persona.cliTelefono}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <label for="Telefono-FR">Telefono</label>
+                    </div>
+
+                    <div class="col-md-5">
+                        <h:inputSecret 
+                            id="Clave-FR" 
+                            value="#{cSession.usuario.usClave}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <label for="Clave-FR">Contraseña</label>
+                    </div>     
+
+                    <div class="col-md-12">
+                        <h:commandButton action="#{cSession.registrar()}" class="btn btn-primary" value="INGRESAR"/>
+                    </div>
+                </h:form>
+            </div>
+        </div>
+        <!--Ingresar cliente -->
+
+
+    </ui:define>
+
+
+
+
+    <ui:define name="URL_css">
+        <link href="../../assents/css/styles.css" rel="stylesheet" type="text/css"/>
+    </ui:define>
+
+    <ui:define name="URL_js">
+        <script src="../../assents/js/scripts.js" type="text/javascript"></script>
+    </ui:define>
+
+
+
+
+</ui:composition>
+

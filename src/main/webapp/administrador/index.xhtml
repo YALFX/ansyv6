@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      template="templates/AD.xhtml">
+    
+    <ui:define name="URL_salir">
+        <a class="dropdown-item" href="../login.xhtml">Salir</a>
+    </ui:define>
+    
+    <ui:define name="URL_inicio">
+        <a class="navbar-brand ps-3" href="">Inicio</a>
+    </ui:define>
+    
+    <ui:define name="lista_menu">
+        <a class="nav-link" href="clientes/clientes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Clientes
+        </a>
+        <a class="nav-link" href="planes/planes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Planes y servicios
+        </a>
+        <a class="nav-link" href="entidades/entidades.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Entidades
+        </a>
+        <a class="nav-link" href="clientes/mensajes.xhtml"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Mensajes
+        </a>
+        <a class="nav-link" href="correos.xhtml"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            E-mails
+        </a>
+    </ui:define>
+    
+    <ui:define name="URL_css">
+        <link href="../assents/css/styles.css" rel="stylesheet" type="text/css"/>
+    </ui:define>
+    
+    <ui:define name="URL_js">
+        <script src="../assents/js/scripts.js" type="text/javascript"></script>
+    </ui:define>
+      
+    <ui:define name="contenido">
+        
+        <h1 class="mt-4">Dashboard</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+
+        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Clientes Registrados # #{dashAdminView.contarClientes()}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#"></a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Planes registrados # #{dashAdminView.contarServicios()}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#"></a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Entidades registradas # #{dashAdminView.contarEntidades()}</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#"></a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">PQRS</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+             
+             
+    </ui:define>
+    
+</ui:composition>
+

@@ -1,0 +1,21 @@
+#menuLateral{
+    background: gray;
+    color: white;
+    height: 800px;
+}
+
+#RoG{
+    height: 800%;
+    width: 100%;
+}
+
+#menuLateral a{
+    margin-top: 1%;
+    width: 100%;
+    color:white!important;
+}
+
+#baraOpciones{
+    padding: 0%!important;
+    border: 1px solid black;
+}

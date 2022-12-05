@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entity-mappings v="5.4.3" status="GENERATED" persistenceUnitName="DEFAULT_PU" sm="false" id="_16561145745751" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <entity abs="false" class="Servicios" v="true" xre="false" m="false" rootElement="_16561145745751" id="_16561145745762">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="serNombre" id="_165611457457912">
+                <column name="Ser_Nombre" unique="false" nullable="false" insertable="true" updatable="true" table="servicios" length="45"/>
+            </basic>
+            <basic optional="false" attribute-type="String" v="true" name="serCategoria" id="_165611457457913">
+                <column name="Ser_Categoria" unique="false" nullable="false" insertable="true" updatable="true" table="servicios" length="45"/>
+            </basic>
+            <many-to-one optional="false" connected-entity-id="_16561145745764" connected-attribute-id="_165611457458022" v="true" name="serEntidad" id="_165611457457914">
+                <join-column name="SER_ENTIDAD" rc="ID_ENTIDADES" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <one-to-many own="false" connected-entity-id="_16561145745768" connected-attribute-id="_165611457458056" v="true" name="usuariosCollection" id="_165611457457915"/>
+            <id attribute-type="Integer" v="true" name="idServicio" id="_165611457457811">
+                <column name="Id_Servicio" unique="false" nullable="false" insertable="true" updatable="true" table="servicios"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="servicios"/>
+    </entity>
+    <entity abs="false" class="Departamentos" v="true" xre="false" m="false" rootElement="_16561145745751" id="_16561145745763">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="depNombre" id="_165611457457917">
+                <column name="DepNombre" unique="false" nullable="false" insertable="true" updatable="true" table="departamentos" length="45"/>
+            </basic>
+            <one-to-many own="false" connected-entity-id="_16561145745767" connected-attribute-id="_165611457458049" v="true" name="clientesCollection" id="_165611457457918"/>
+            <id attribute-type="Integer" v="true" name="idDepartamento" id="_165611457457916">
+                <column name="Id_Departamento" unique="false" nullable="false" insertable="true" updatable="true" table="departamentos"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="departamentos"/>
+    </entity>
+    <entity abs="false" class="Entidades" v="true" xre="false" m="false" rootElement="_16561145745751" id="_16561145745764">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="entNombre" id="_165611457458020">
+                <column name="Ent_Nombre" unique="false" nullable="false" insertable="true" updatable="true" table="entidades" length="45"/>
+            </basic>
+            <basic optional="false" attribute-type="String" v="true" name="entDescripcion" id="_165611457458021">
+                <column name="Ent_Descripcion" unique="false" nullable="false" insertable="true" updatable="true" table="entidades" length="100"/>
+            </basic>
+            <one-to-many own="false" connected-entity-id="_16561145745762" connected-attribute-id="_165611457457914" v="true" name="serviciosCollection" id="_165611457458022"/>
+            <one-to-many own="false" connected-entity-id="_16561145745766" connected-attribute-id="_165611457458034" v="true" name="planesCollection" id="_165611457458023"/>
+            <id attribute-type="Integer" v="true" name="idEntidades" id="_165611457457919">
+                <column name="Id_Entidades" unique="false" nullable="false" insertable="true" updatable="true" table="entidades"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="entidades"/>
+    </entity>
+    <entity abs="false" class="TiposDocumentos" v="true" xre="false" m="false" rootElement="_16561145745751" id="_16561145745765">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="docNombre" id="_165611457458025">
+                <column name="DocNombre" unique="false" nullable="false" insertable="true" updatable="true" table="tipos_documentos" length="45"/>
+            </basic>
+            <one-to-many own="false" connected-entity-id="_16561145745767" connected-attribute-id="_165611457458051" v="true" name="clientesCollection" id="_165611457458026"/>
+            <id attribute-type="Integer" v="true" name="idTipoDocumento" id="_165611457458024">
+                <column name="Id_TipoDocumento" unique="false" nullable="false" insertable="true" updatable="true" table="tipos_documentos"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="tipos_documentos"/>
+    </entity>
+    <entity abs="false" class="Planes" v="true" xre="false" m="false" rootElement="_16561145745751" id="_16561145745766">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="planNombre" id="_165611457458028">
+                <column name="Plan_Nombre" unique="false" nullable="false" insertable="true" updatable="true" table="planes" length="45"/>
+            </basic>
+            <basic optional="false" attribute-type="String" v="true" name="planCategoria" id="_165611457458029">
+                <column name="Plan_Categoria" unique="false" nullable="false" insertable="true" updatable="true" table="planes" length="45"/>
+            </basic>
+            <basic optional="false" attribute-type="String" v="true" name="planTipoPlan" id="_165611457458030">
+                <column name="Plan_TipoPlan" unique="false" nullable="false" insertable="true" updatable="true" table="planes" length="45"/>
+            </basic>
+            <basic optional="false" attribute-type="String" v="true" name="planCopago" id="_165611457458031">
+                <column name="Plan_Copago" unique="false" nullable="false" insertable="true" updatable="true" table="planes" length="45"/>
+            </basic>
+            <basic optional="false" attribute-type="double" v="true" name="planPrecio" id="_165611457458032">
+                <column name="Plan_Precio" unique="false" nullable="false" insertable="true" updatable="true" table="planes"/>
+            </basic>
+            <basic optional="false" attribute-type="double" v="true" name="planDescripcion" id="_165611457458033">
+                <column name="Plan_Descripcion" unique="false" nullable="false" insertable="true" updatable="true" table="planes"/>
+            </basic>
+            <many-to-one optional="false" connected-entity-id="_16561145745764" connected-attribute-id="_165611457458023" v="true" name="planEntidad" id="_165611457458034">
+                <join-column name="PLAN_ENTIDAD" rc="ID_ENTIDADES" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <one-to-many own="false" connected-entity-id="_16561145745768" connected-attribute-id="_165611457458055" v="true" name="usuariosCollection" id="_165611457458035"/>
+            <id attribute-type="Integer" v="true" name="idPlan" id="_165611457458027">
+                <column name="Id_Plan" unique="false" nullable="false" insertable="true" updatable="true" table="planes"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="planes"/>
+    </entity>
+    <entity abs="false" class="Clientes" v="true" xre="false" m="false" rootElement="_16561145745751" id="_16561145745767">
+        <attributes>
+            <basic optional="true" attribute-type="String" v="true" name="cliNombre" id="_165611457458037">
+                <column name="Cli_Nombre" unique="false" nullable="true" insertable="true" updatable="true" table="clientes" length="80"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="cliApellido" id="_165611457458038">
+                <column name="Cli_Apellido" unique="false" nullable="true" insertable="true" updatable="true" table="clientes" length="50"/>
+            </basic>
+            <basic optional="true" attribute-type="Integer" v="true" name="cliNumeroDocumento" id="_165611457458039">
+                <column name="Cli_NumeroDocumento" unique="false" nullable="true" insertable="true" updatable="true" table="clientes"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="cliSexo" id="_165611457458040">
+                <column name="Cli_Sexo" unique="false" nullable="true" insertable="true" updatable="true" table="clientes" length="1"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="cliEPS" id="_165611457458041">
+                <column name="Cli_EPS" unique="false" nullable="true" insertable="true" updatable="true" table="clientes" length="30"/>
+            </basic>
+            <basic optional="true" attribute-type="java.util.Date" v="true" name="cliFechaNacimiento" id="_165611457458042">
+                <temporal>DATE</temporal>
+                <column name="Cli_FechaNacimiento" unique="false" nullable="true" insertable="true" updatable="true" table="clientes"/>
+            </basic>
+            <basic optional="true" attribute-type="Integer" v="true" name="cliNumeroHijos" id="_165611457458043">
+                <column name="Cli_NumeroHijos" unique="false" nullable="true" insertable="true" updatable="true" table="clientes"/>
+            </basic>
+            <basic optional="true" attribute-type="Integer" v="true" name="cliTelefono" id="_165611457458044">
+                <column name="Cli_Telefono" unique="false" nullable="true" insertable="true" updatable="true" table="clientes"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="cliPais" id="_165611457458045">
+                <column name="Cli_Pais" unique="false" nullable="true" insertable="true" updatable="true" table="clientes" length="45"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="cliDirección" id="_165611457458046">
+                <column name="Cli_Dirección" unique="false" nullable="true" insertable="true" updatable="true" table="clientes" length="45"/>
+            </basic>
+            <basic optional="true" attribute-type="String" v="true" name="cliCorreo" id="_165611457458047">
+                <column name="Cli_Correo" unique="false" nullable="true" insertable="true" updatable="true" table="clientes" length="45"/>
+            </basic>
+            <many-to-one connected-entity-id="_165611457457610" connected-attribute-id="_165611457458062" v="true" name="cliCiudad" id="_165611457458048">
+                <join-column name="CLI_CIUDAD" rc="ID_CIUDAD" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <many-to-one connected-entity-id="_16561145745763" connected-attribute-id="_165611457457918" v="true" name="cliDepartamento" id="_165611457458049">
+                <join-column name="CLI_DEPARTAMENTO" rc="ID_DEPARTAMENTO" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <many-to-one connected-entity-id="_16561145745769" connected-attribute-id="_165611457458059" v="true" name="cliEstadoCivil" id="_165611457458050">
+                <join-column name="CLI_ESTADOCIVIL" rc="ID_ESTADOCIVIL" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <many-to-one connected-entity-id="_16561145745765" connected-attribute-id="_165611457458026" v="true" name="cliTipoDocumento" id="_165611457458051">
+                <join-column name="CLI_TIPODOCUMENTO" rc="ID_TIPODOCUMENTO" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <one-to-many own="false" connected-entity-id="_16561145745768" connected-attribute-id="_165611457458054" v="true" name="usuariosCollection" id="_165611457458052"/>
+            <id attribute-type="Integer" v="true" name="idCliente" id="_165611457458036">
+                <column name="Id_Cliente" unique="false" nullable="false" insertable="true" updatable="true" table="clientes"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="clientes"/>
+    </entity>
+    <entity abs="false" class="Usuarios" v="true" xre="false" m="false" rootElement="_16561145745751" id="_16561145745768">
+        <attributes>
+            <many-to-one optional="false" connected-entity-id="_16561145745767" connected-attribute-id="_165611457458052" v="true" name="iDCliente" id="_165611457458054">
+                <join-column name="ID_CLIENTE" rc="ID_CLIENTE" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <many-to-one optional="false" connected-entity-id="_16561145745766" connected-attribute-id="_165611457458035" v="true" name="planadd" id="_165611457458055">
+                <join-column name="PLAN_ADD" rc="ID_PLAN" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <many-to-one optional="false" connected-entity-id="_16561145745762" connected-attribute-id="_165611457457915" v="true" name="seradd" id="_165611457458056">
+                <join-column name="SER_ADD" rc="ID_SERVICIO" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </many-to-one>
+            <id attribute-type="Integer" v="true" name="idUsuario" id="_165611457458053">
+                <column name="Id_Usuario" unique="false" nullable="false" insertable="true" updatable="true" table="usuarios"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="usuarios"/>
+    </entity>
+    <entity abs="false" class="EstadosCiviles" v="true" xre="false" m="false" rootElement="_16561145745751" id="_16561145745769">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="eCNombre" id="_165611457458058">
+                <column name="EC_Nombre" unique="false" nullable="false" insertable="true" updatable="true" table="estados_civiles" length="45"/>
+            </basic>
+            <one-to-many own="false" connected-entity-id="_16561145745767" connected-attribute-id="_165611457458050" v="true" name="clientesCollection" id="_165611457458059"/>
+            <id attribute-type="Integer" v="true" name="idEstadoCivil" id="_165611457458057">
+                <column name="Id_EstadoCivil" unique="false" nullable="false" insertable="true" updatable="true" table="estados_civiles"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="estados_civiles"/>
+    </entity>
+    <entity abs="false" class="Ciudades" v="true" xre="false" m="false" rootElement="_16561145745751" id="_165611457457610">
+        <attributes>
+            <basic optional="false" attribute-type="String" v="true" name="ciuNombre" id="_165611457458061">
+                <column name="Ciu_Nombre" unique="false" nullable="false" insertable="true" updatable="true" table="ciudades" length="45"/>
+            </basic>
+            <one-to-many own="false" connected-entity-id="_16561145745767" connected-attribute-id="_165611457458048" v="true" name="clientesCollection" id="_165611457458062"/>
+            <id attribute-type="Integer" v="true" name="idCiudad" id="_165611457458060">
+                <column name="Id_Ciudad" unique="false" nullable="false" insertable="true" updatable="true" table="ciudades"/>
+                <generated-value strategy="DEFAULT"/>
+            </id>
+        </attributes>
+        <table name="ciudades"/>
+    </entity>
+</entity-mappings>

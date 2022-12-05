@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/2b3326f37a.js" crossorigin="anonymous"></script>
+    <h:head>
+        <meta charset='utf-8'/>
+        <title>Consula</title>
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"></link>       
+        <link href="../assents/css/admin.css" rel="stylesheet" type="text/css"/>
+        <!--datatable-->
+        <link href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+        <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>
+    </h:head>
+    <h:body>
+        <div class="row" id="RoG">
+            <div class="col-2" style="padding: 0px!important">
+                <center>
+                    <img src="../assents/Img/Logo.png" width="25%"></img>
+
+                    <h4>Menu</h4>
+                </center>
+                <div id="menuLateral">
+                    <center>
+                    <a class="btn btn-outline-dark m-1" href="planes.xhtml" role="button">
+                        Inicio <span class="badge text-bg-secondary">3</span>
+                    </a>
+                    <a class="btn btn-outline-dark m-1" href="planes.xhtml" role="button">
+                        Consultar planes
+                    </a>
+                    <a class="btn btn-outline-dark m-1" href="update.xhtml" role="button">
+                        Actualizar planes
+                    </a>
+                    <a class="btn btn-outline-dark m-1" href="datos.xhtml" role="button">
+                        Mis datos
+                    </a>
+                    <a class="btn btn-outline-dark m-1" href="../login.xhtml" role="button">
+                        Cerrar sesion
+                    </a>
+                    </center>
+                </div>
+            </div>
+
+            <div class="col-10" id="baraOpciones"  >
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+                    <div class="container-fluid">
+                        <span class="navbar-brand mb-0 h1">Barra de opciones</span>
+                    </div>
+                </nav>
+
+                <div class="#{controllerPlanesAdmi.alertClass} alert-dismissible fade show p-2" role="alert" Style="text-align: center">
+                    #{controllerPlanesAdmi.alertMessaje}
+                    
+                </div>
+
+                 <table id="example" class="display nowrap" >
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Categoria</th>
+                            <th>Tipo</th>
+                            <th>Precio</th>
+                            <th>Descripcion</th>
+                            <th>Opciones</th>
+                            
+                           
+                        </tr>
+                    </thead>
+                   <tbody>
+                        <c:forEach items="#{controllerPlanesAdmi.listarTodosPla()}" var="pd">
+                            <tr>
+                                <td>#{pd.idPlan}</td>
+                                <td>#{pd.planNombre}</td>
+                                <td>#{pd.planCategoria}</td>
+                                <td>#{pd.planTipoPlan}</td>
+                                <td>#{pd.planPrecio}</td>
+                                <td>#{pd.planDescripcion}</td>
+                                <td>
+                                    <h:form>
+                                        <h:commandButton action="#{controllerPlanesAdmi.eliminarP(pd.idPlan)}" class="btn btn-danger" value="Eliminar"></h:commandButton> 
+                                        <h:commandButton action="#{pSession.cargarDatos(pd.idPlan)}" class="btn btn-warning" value="Update"></h:commandButton>
+                                        
+                                    </h:form>
+                                </td>
+                                
+                                                             
+                            </tr> 
+                        </c:forEach>
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                           <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Categoria</th>
+                            <th>Tipo</th>
+                            <th>Precio</th>
+                            <th>Descripcion</th>
+                            <th>Opciones</th>
+                            
+                            
+                        </tr>
+                    </tfoot>
+                </table>
+
+               <!--Ingresar Clientes-->
+                <div class="d-grid gap-2 d-md-block m-2">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                        Ingresar Nuevo plan
+                    </button>
+                </div>
+
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Registro Planes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <h:form class="row g-2">
+                            
+                            <div class="col-md-12"> 
+                                <label for="Nombres-PL" class="form-label">Nombre</label>
+                                <h:inputText 
+                                    id="Nombres-PL"
+                                    h5:placeholder="Nombre"
+                                    value="#{controllerPlanesAdmi.plan.planNombre}"
+                                    requiredMessage="Ingrese un valor valido"
+                                    class="form-control"/>                            
+                                <h:message for="Nombres-PL" style="color: red"></h:message>
+                            </div>
+                                                       
+
+                            <div class="col-md-12">
+                                <label for="Categoria-PL">Categoría</label>
+                                <h:inputText 
+                                    id="Categoria-PL" 
+                                    h5:placeholder="Categoria"
+                                    value="#{controllerPlanesAdmi.plan.planCategoria}"
+                                    requiredMessage="Ingrese un valor valido"
+                                    class="form-control"/>                        
+                                <h:message for="Categoria-PL" style="color: red"></h:message>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <label for="TipoPlan-PL">Tipo Plan</label>
+                                <h:inputText 
+                                    id="TipoPlan-PL" 
+                                    h5:placeholder="Tipo de Plan"
+                                    value="#{controllerPlanesAdmi.plan.planTipoPlan}"
+                                    requiredMessage="Ingrese un valor valido"
+                                    class="form-control"/>                        
+                                <h:message for="TipoPlan-PL" style="color: red"></h:message>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <label for="Precio-PL">Precio</label>
+                                <h:inputText 
+                                    id="Precio-PL" 
+                                    h5:placeholder="Precio"
+                                    value="#{controllerPlanesAdmi.plan.planPrecio}"
+                                    requiredMessage="Ingrese un valor valido"
+                                    class="form-control"/>                        
+                                <h:message for="Precio-PL" style="color: red"></h:message>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <label for="Descripcion-PL">Descripción</label>
+                                <h:inputText 
+                                    id="Descripcion-PL" 
+                                    h5:placeholder="Descripción"
+                                    value="#{controllerPlanesAdmi.plan.planDescripcion}"
+                                    requiredMessage="Ingrese un valor valido"
+                                    class="form-control"/>                        
+                                <h:message for="Descripcion-PL" style="color: red"></h:message>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <label for="Entidad-PL">Entidad</label>
+                                <h:inputText 
+                                    id="Entidad-PL" 
+                                    h5:placeholder="Entidad"
+                                    value="#{controllerPlanesAdmi.entidad}"
+                                    requiredMessage="Ingrese un valor valido"
+                                    class="form-control"/>                        
+                                <h:message for="Entidad-PL" style="color: red"></h:message>
+                            </div>
+                            
+                            <div class="col-md-12">
+                                <label for="Copago-PL">Copago</label>
+                                <h:inputText 
+                                    id="Copago-PL" 
+                                    h5:placeholder="Copago"
+                                    value="#{controllerPlanesAdmi.plan.planCopago}"
+                                    requiredMessage="Ingrese un valor valido"
+                                    class="form-control"/>                        
+                                <h:message for="Copago-PL" style="color: red"></h:message>
+                            </div>
+ 
+ 
+
+                            <div class="col-md-12">
+                                <h:commandButton action="#{controllerPlanesAdmi.registrar()}" class="btn btn-primary" value="INGRESAR"/>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+                <!--Ingresar cliente -->
+
+
+                <!--Actualizar Clientes-->
+                <div class="d-grid gap-2 d-md-block m-2">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                        Actualizar cliente
+                    </button>
+                </div>
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="width: 100%;">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasRightLabel">Actualizar datos</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <iframe src="update.xhtml" height="100%" width="100%"></iframe>                 
+                </div>
+                <!--Actualizar cliente -->
+
+                
+                <!-- Modal -->
+
+
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#example').DataTable({
+
+                    "language": {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        }
+                    },
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
+            });
+        </script>
+
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>     
+    </h:body>
+</html>
+

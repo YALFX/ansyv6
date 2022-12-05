@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<al:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:al="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="../templates/AD.xhtml">
+
+
+    <al:define name="URL_salir">
+        <a class="dropdown-item" href="../../index.xhtml">Salir</a>
+    </al:define>
+    <al:define name="URL_inicio">
+        <a class="navbar-brand ps-3" href="../index.xhtml">Inicio</a>
+    </al:define>
+
+    <al:define name="lista_menu">
+        <a class="nav-link" href="../clientes/clientes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Clientes
+        </a>
+        <a class="nav-link" href="planes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Planes y servicios
+        </a>
+        <a class="nav-link" href="../entidades/entidades.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Entidades
+        </a>
+        <a class="nav-link" href="mensajes.xhtml">
+            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            Mensajes
+        </a>
+        <a class="nav-link" href="../correos.xhtml"><div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+            E-mails
+        </a>
+    </al:define>
+
+    <al:define name="contenido">
+        <h1 class="mt-4">Servicios</h1>
+
+
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Administracion de servicios</li>
+        </ol>
+
+
+        <table id="example" class="display nowrap" >
+            <thead>
+                <tr>
+
+                    <th>Nombre</th>
+                    <th>Entidad</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <c:forEach items="#{planAdminSession.listarPlanes()}" var="sf">
+                    <tr>
+                        <td>#{sf.planNombre}</td>
+                        <td>#{sf.planEntidad.entNombre}</td>
+                        <td>#{sf.planTipoPlan}</td>
+                        <td>#{sf.planest.nameest}</td>
+                        <td>
+                            <h:form>
+                                <h:commandButton  action="#{planAdminSession.cargarDatos(sf.idPlan)}"  image="../../assents/Img/icons/edit.svg" style="width: 25px"></h:commandButton>
+                                <h:commandButton  action="#{planAdminSession.eliminarServicio(sf.idPlan)}" class="m-1" image="../../assents/Img/icons/trash.svg" style="width: 20px"></h:commandButton>
+                            </h:form>
+                        </td>
+                    </tr> 
+                </c:forEach>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Entidad</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                </tr>
+            </tfoot>
+        </table>
+
+        <h:form>
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                Ingresar Nuevo
+            </button>
+
+            <!-- Button trigger modal -->
+            <button value="Importar plantilla" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Importar plantilla
+            </button>
+
+
+            <h:commandButton action="#{cSession.dowDoc()}" image="../../assents/Img/icons/down-long-solid.svg" style="width: 40px" class="btn btn-primary m-1" value="descargar plantilla"></h:commandButton>
+        </h:form>
+
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Registro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <h:form class="row g-2" enctype="multipart/form-data">
+                    <div class="col-md-6"> 
+                        <label for="Nombre-FR" class="form-label">Nombre</label>
+                        <h:inputText 
+                            id="Nombre-FR" 
+                            value="#{planAdminSession.plan.planNombre}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <h:message for="Nombre-FR" style="color: red"></h:message>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Categoria-FR" class="form-label">Categoria</label>
+                        <h:inputText 
+                            id="Categoria-FR" 
+                            value="#{planAdminSession.plan.planCategoria}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>            
+                        <h:message for="Categoria-FR" style="color: red"></h:message>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Tipo-FR" class="form-label">Tipo</label> 
+                        <h:inputText 
+                            id="Tipo-FR" 
+                            value="#{planAdminSession.plan.planTipoPlan}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <h:message for="Tipo-FR" style="color: red"></h:message>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Precio-FR" class="form-label">Precio</label> 
+                        <h:inputText 
+                            id="Precio-FR" 
+                            value="#{planAdminSession.plan.planPrecio}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <h:message for="Precio-FR" style="color: red"></h:message>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="Entidades-FR" class="form-label">Entidades</label> 
+                        <div class="input-group mt-2 gap-2 border-secondary">
+                            <h:selectOneMenu value="#{planAdminSession.entidad}" h5:class="form-select bg-light"  >
+                                <c:forEach items="#{planAdminSession.listarEntidades()}" var="en">
+                                    <f:selectItem itemLabel="#{en.entNombre}" itemValue="#{en.idEntidades}"></f:selectItem>
+                                </c:forEach>
+                                <f:selectItem itemLabel="Otra" itemValue="N/A"></f:selectItem>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Estados-FR" class="form-label">Estados</label> 
+                        <div class="input-group mt-2 gap-2 border-secondary">
+                            <h:selectOneMenu value="#{planAdminSession.estado}" h5:class="form-select bg-light"  >
+                                <c:forEach items="#{planAdminSession.listarEstados()}" var="est">
+                                    <f:selectItem itemLabel="#{est.nameest}" itemValue="#{est.IDest}"></f:selectItem>
+                                </c:forEach>
+                                <f:selectItem itemLabel="Ninguno" itemValue="N/A"></f:selectItem>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Estados-FR" class="form-label">Copago</label> 
+                        <div class="input-group mt-2 gap-2 border-secondary">
+                            <h:selectOneMenu value="#{planAdminSession.plan.planCopago}" h5:class="form-select bg-light"  >
+                                <f:selectItem itemLabel="Si" itemValue="Si"></f:selectItem>
+                                <f:selectItem itemLabel="No" itemValue="No"></f:selectItem>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Descripcion-FR" class="form-label">Descripcion</label> 
+                        <h:inputTextarea 
+                            id="Descripcion-FR" 
+                            value="#{planAdminSession.plan.planDescripcion}"
+                            requiredMessage="Ingrese un valor valido"
+                            class="form-control"/>
+                        <h:message for="Descripcion-FR" style="color: red"></h:message>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Img-FR" class="form-label">Imagen por defecto</label> 
+                        <p:graphicImage name="planes/Plan-Oro.jpg" library="imagenes" style="height: 200px; border-radius: 5%;"/>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="ImgC-FR" class="form-label">Cambiar imagen</label> 
+                        <p:fileUpload value="#{planAdminSession.file}" mode="simple" skinSimple="true" label="seleciona una imagen"/>
+                    </div>
+
+                    <div class="col-md-12">
+                        <h:commandButton action="#{planAdminSession.registrarServico()}" class="btn btn-primary" value="Guardar" style="width: 100%"/>
+                    </div>
+
+                </h:form>
+            </div>
+        </div>      
+
+    </al:define>
+
+    <al:define name="URL_css">
+        <link href="../../assents/css/styles.css" rel="stylesheet" type="text/css"/>
+    </al:define>
+
+    <al:define name="URL_js">
+        <script src="../../assents/js/scripts.js" type="text/javascript"></script>
+    </al:define>
+
+</al:composition>
+

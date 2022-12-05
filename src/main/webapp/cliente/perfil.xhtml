@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:h5="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="templates/templateCN.xhtml"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="contenido">
+        <h2>Bienvenido</h2>
+        <hr/>
+        <h2>Servicios Adquiridos</h2>
+        <h:form>
+            <p:growl id="messages" showDetail="true"/>
+        </h:form>
+
+
+        
+
+
+
+        <c:forEach items="#{cSession.listarServiciosAdquiridos()}" var="sf">
+
+            <div class="card mb-3" style=" height: 10%">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <p:graphicImage name="entidades/#{sf.IDServicio.planEntidad.nameimg}" library="imagenes" style="width: 100%; height: 100%"/>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">#{sf.IDServicio.planNombre}</h5>
+                            <p class="card-text">#{sf.IDServicio.planDescripcion}</p>
+                            <p class="card-text"><small class="text-muted">#{sf.IDEstado.nameest}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </c:forEach>
+
+
+
+    </ui:define>
+
+
+
+</ui:composition>

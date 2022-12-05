@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+.navbar nav{
+    margin: 0;
+    font-size: 2px;
+    padding: 2px;
+    border-width:medium;
+   
+    
+}
+body{
+    font:100% sans-serif;
+    color: rgb(0, 0, 62);
+    font-size: 60px;
+    text-align: center;
+    justify-content:center;
+   
+}
+    
+.contenedor{
+    padding: 60px 0;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    overflow: hidden;
+    text-align: center;
+    font:100% sans-serif;
+}
+
+
+.card{
+   margin:0;
+    
+}
+
+header .textos-header{
+    display: flex;
+    height: 430px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.footer{
+    align-content:center;
+    font:100% sans-serif;
+}
