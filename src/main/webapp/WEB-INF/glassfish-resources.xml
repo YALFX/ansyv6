@@ -9,7 +9,5 @@
         <property name="Password" value="7/-O8V3pjK[9gWcS"/>
         <property name="URL" value="jdbc:mysql://node111709-ccsasesoresweb.jcloud-ver-jpe.ik-server.com/ccsasesores"/>
         <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
-    </jdbc-connection-pool>
-   
-    
+    </jdbc-connection-pool> 
 </resources>
