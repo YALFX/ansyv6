@@ -29,6 +29,8 @@ public interface ServiciosAdquiridosFacadeLocal {
 
     int count();
     
+    //
+    
     public List<ServiciosAdquiridos> planesActivosClientes(int idCliente, int estado);
     public List<ServiciosAdquiridos> buscarIDUsuario(int idCliente);
     

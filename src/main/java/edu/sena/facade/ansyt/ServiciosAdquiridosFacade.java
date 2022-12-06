@@ -55,4 +55,6 @@ public class ServiciosAdquiridosFacade extends AbstractFacade<ServiciosAdquirido
         }
     }
     
+    //
+    
 }

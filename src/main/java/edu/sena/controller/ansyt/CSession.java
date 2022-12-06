@@ -66,6 +66,7 @@ public class CSession implements Serializable {
     RolesFacadeLocal rfl;
     @EJB
     ServiciosAdquiridosFacadeLocal sfl;
+    
 
     private Clientes persona = new Clientes();
     private Usuarios usuario = new Usuarios();

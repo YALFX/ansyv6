@@ -19,8 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
 
 /**
  *
@@ -28,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Tipos_Documentos")
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "TiposDocumentos.findAll", query = "SELECT t FROM TiposDocumentos t"),
     @NamedQuery(name = "TiposDocumentos.findByIdTipoDocumento", query = "SELECT t FROM TiposDocumentos t WHERE t.idTipoDocumento = :idTipoDocumento"),
@@ -77,10 +76,7 @@ public class TiposDocumentos implements Serializable {
         this.docNombre = docNombre;
     }
 
-    @XmlTransient
-    public Collection<Clientes> getClientesCollection() {
-        return clientesCollection;
-    }
+
 
     public void setClientesCollection(Collection<Clientes> clientesCollection) {
         this.clientesCollection = clientesCollection;

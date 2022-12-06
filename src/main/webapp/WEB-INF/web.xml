@@ -23,12 +23,12 @@
     </welcome-file-list>
     
     <data-source>
-        <name>java:comp/DefaultDataSource</name>
+        <name>JDBC/ANSY</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <server-name>localhost</server-name>
+        <server-name>node111709-ccsasesoresweb.jcloud-ver-jpe.ik-server.com</server-name>
         <port-number>3306</port-number>
         <database-name>ccsasesores</database-name>
-        <user>Ansy</user>
+        <user>AnsyUser</user>
         <password>7/-O8V3pjK[9gWcS</password>
         <property>
             <name>useSSL</name>

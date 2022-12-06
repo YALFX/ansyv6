@@ -26,8 +26,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
 
 /**
  *
@@ -35,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Clientes")
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "Clientes.findAll", query = "SELECT c FROM Clientes c"),
     @NamedQuery(name = "Clientes.findByIdCliente", query = "SELECT c FROM Clientes c WHERE c.idCliente = :idCliente"),
@@ -253,19 +252,13 @@ public class Clientes implements Serializable {
         this.cliEstadoCivil = cliEstadoCivil;
     }
 
-    @XmlTransient
-    public Collection<Usuarios> getUsuariosCollection() {
-        return usuariosCollection;
-    }
+
 
     public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
         this.usuariosCollection = usuariosCollection;
     }
 
-    @XmlTransient
-    public Collection<Pqrs> getPqrsCollection() {
-        return pqrsCollection;
-    }
+
 
     public void setPqrsCollection(Collection<Pqrs> pqrsCollection) {
         this.pqrsCollection = pqrsCollection;

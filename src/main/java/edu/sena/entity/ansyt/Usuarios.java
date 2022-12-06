@@ -21,8 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
 
 /**
  *
@@ -30,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Usuarios")
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "Usuarios.findAll", query = "SELECT u FROM Usuarios u"),
     @NamedQuery(name = "Usuarios.findByIdUsuario", query = "SELECT u FROM Usuarios u WHERE u.idUsuario = :idUsuario"),
@@ -128,10 +127,7 @@ public class Usuarios implements Serializable {
         this.rolTipo = rolTipo;
     }
 
-    @XmlTransient
-    public Collection<ServiciosAdquiridos> getServiciosAdquiridosCollection() {
-        return serviciosAdquiridosCollection;
-    }
+
 
     public void setServiciosAdquiridosCollection(Collection<ServiciosAdquiridos> serviciosAdquiridosCollection) {
         this.serviciosAdquiridosCollection = serviciosAdquiridosCollection;

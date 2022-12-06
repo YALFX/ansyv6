@@ -23,8 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+
 
 /**
  *
@@ -32,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "Planes")
-@XmlRootElement
+
 @NamedQueries({
     @NamedQuery(name = "Planes.findAll", query = "SELECT p FROM Planes p"),
     @NamedQuery(name = "Planes.findByIdPlan", query = "SELECT p FROM Planes p WHERE p.idPlan = :idPlan"),
@@ -186,10 +185,6 @@ public class Planes implements Serializable {
         this.nameimg = nameimg;
     }
 
-    @XmlTransient
-    public Collection<Usuarios> getUsuariosCollection() {
-        return usuariosCollection;
-    }
 
     public void setUsuariosCollection(Collection<Usuarios> usuariosCollection) {
         this.usuariosCollection = usuariosCollection;
@@ -211,10 +206,7 @@ public class Planes implements Serializable {
         this.planest = planest;
     }
 
-    @XmlTransient
-    public Collection<ServiciosAdquiridos> getServiciosAdquiridosCollection() {
-        return serviciosAdquiridosCollection;
-    }
+
 
     public void setServiciosAdquiridosCollection(Collection<ServiciosAdquiridos> serviciosAdquiridosCollection) {
         this.serviciosAdquiridosCollection = serviciosAdquiridosCollection;
